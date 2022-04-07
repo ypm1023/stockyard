@@ -84,7 +84,7 @@ const WaringList = () => {
                                     <Stack direction="row" justifyContent="left" alignItems="center">
                                         <Tooltip placement="top" title="查看报警视频">
                                             <IconButton color="primary" aria-label="delete" size="large">
-                                                <VisibilityTwoTone sx={{ fontSize: '1.1rem' }} />
+                                                <VisibilityTwoTone sx={{ fontSize: '1.5rem' }} />
                                             </IconButton>
                                         </Tooltip>
                                         {row.status === 'Pending' && (
@@ -98,7 +98,7 @@ const WaringList = () => {
                                                     }}
                                                     size="large"
                                                 >
-                                                    <GavelTwoTone sx={{ fontSize: '1.1rem' }} />
+                                                    <GavelTwoTone sx={{ fontSize: '1.5rem' }} />
                                                 </IconButton>
                                             </Tooltip>
                                         )}

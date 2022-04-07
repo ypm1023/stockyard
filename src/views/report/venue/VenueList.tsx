@@ -98,7 +98,7 @@ const VenueList = () => {
                                                     }}
                                                     size="large"
                                                 >
-                                                    <DeleteOutlineTwoTone sx={{ fontSize: '1.1rem' }} />
+                                                    <DeleteOutlineTwoTone sx={{ fontSize: '1.5rem' }} />
                                                 </IconButton>
                                             </Tooltip>
                                         )}
