@@ -39,9 +39,7 @@ export default slice.reducer;
 export function getWaringList() {
     return async () => {
         try {
-            console.log('getWaringList');
             const response = await axios.get('/api/waring/list');
-            console.log('response------------------>', response);
             dispatch(slice.actions.getWaringListSuccess(response.data.waring_s1));
         } catch (error) {
             dispatch(slice.actions.hasError(error));

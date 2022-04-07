@@ -34,7 +34,7 @@ const report = {
             title: '场地信息',
             icon: icons.IconLayoutKanban,
             type: 'item',
-            url: '/user/list'
+            url: '/venue/list'
         }
     ]
 };

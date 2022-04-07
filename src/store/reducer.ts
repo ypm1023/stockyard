@@ -16,6 +16,7 @@ import cartReducer from './slices/cart';
 import kanbanReducer from './slices/kanban';
 import menuReducer from './slices/menu';
 import waringReducer from './slices/waring';
+import venueReducer from './slices/venue';
 
 // ==============================|| COMBINE REDUCER ||============================== //
 
@@ -38,7 +39,8 @@ const reducer = combineReducers({
     mail: mailReducer,
     user: userReducer,
     menu: menuReducer,
-    waring: waringReducer
+    waring: waringReducer,
+    venue: venueReducer
 });
 
 export default reducer;

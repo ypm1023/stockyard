@@ -7,39 +7,41 @@ import { Chip, IconButton, Stack, Table, TableBody, TableCell, TableContainer, T
 import { useDispatch, useSelector } from 'store';
 
 // assets
-import GavelTwoTone from '@mui/icons-material/GavelTwoTone';
-import VisibilityTwoTone from '@mui/icons-material/VisibilityTwoTone';
-import { getWaringList } from 'store/slices/waring';
+import EditTwoTone from '@mui/icons-material/EditTwoTone';
+import DeleteOutlineTwoTone from '@mui/icons-material/DeleteOutlineTwoTone';
+import { getVenueList } from 'store/slices/venue';
+import { DefaultRootStateProps } from 'types';
 
 // ==============================|| USER LIST 1 ||============================== //
 
-const WaringList = () => {
+const VenueList = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
 
     const [data, setData] = React.useState<any[]>([]);
-    const { waringS1 } = useSelector((state) => state.waring);
+    const { venueS1 } = useSelector((state: DefaultRootStateProps) => state.venue);
 
     React.useEffect(() => {
-        dispatch(getWaringList());
+        dispatch(getVenueList());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     React.useEffect(() => {
-        setData(waringS1);
-    }, [waringS1]);
+        setData(venueS1);
+    }, [venueS1]);
 
+    console.log('data~~~~~~~~~~~~~~~~~~~', data);
     return (
         <TableContainer>
             <Table>
                 <TableHead>
                     <TableRow>
                         <TableCell align="left" sx={{ pl: 3 }}>
-                            警报类型
+                            场地名称
                         </TableCell>
-                        <TableCell>警报时间</TableCell>
-                        <TableCell>警报状态</TableCell>
-                        <TableCell>处理人</TableCell>
+                        <TableCell>煤炭类型</TableCell>
+                        <TableCell>关联相机数量</TableCell>
+                        <TableCell>使用状态</TableCell>
                         <TableCell align="left" sx={{ pl: 4 }}>
                             操作
                         </TableCell>
@@ -49,12 +51,13 @@ const WaringList = () => {
                     {data &&
                         data.map((row, index) => (
                             <TableRow hover key={index}>
+                                <TableCell sx={{ pl: 3 }}>{row.name}</TableCell>
                                 <TableCell>{row.type}</TableCell>
-                                <TableCell>{row.time}</TableCell>
+                                <TableCell>{row.cameras}</TableCell>
                                 <TableCell>
                                     {row.status === 'Active' && (
                                         <Chip
-                                            label="已处理"
+                                            label="使用中"
                                             size="small"
                                             sx={{
                                                 background:
@@ -67,7 +70,7 @@ const WaringList = () => {
                                     )}
                                     {row.status === 'Pending' && (
                                         <Chip
-                                            label="未处理"
+                                            label="未使用"
                                             size="small"
                                             sx={{
                                                 background:
@@ -77,12 +80,11 @@ const WaringList = () => {
                                         />
                                     )}
                                 </TableCell>
-                                <TableCell>{row.handle}</TableCell>
-                                <TableCell align="left" sx={{ pr: 3 }}>
+                                <TableCell align="left" sx={{ pl: 3 }}>
                                     <Stack direction="row" justifyContent="left" alignItems="center">
                                         <Tooltip placement="top" title="查看报警视频">
                                             <IconButton color="primary" aria-label="delete" size="large">
-                                                <VisibilityTwoTone sx={{ fontSize: '1.1rem' }} />
+                                                <EditTwoTone sx={{ fontSize: '1.5rem' }} />
                                             </IconButton>
                                         </Tooltip>
                                         {row.status === 'Pending' && (
@@ -96,7 +98,7 @@ const WaringList = () => {
                                                     }}
                                                     size="large"
                                                 >
-                                                    <GavelTwoTone sx={{ fontSize: '1.1rem' }} />
+                                                    <DeleteOutlineTwoTone sx={{ fontSize: '1.1rem' }} />
                                                 </IconButton>
                                             </Tooltip>
                                         )}
@@ -110,4 +112,4 @@ const WaringList = () => {
     );
 };
 
-export default WaringList;
+export default VenueList;

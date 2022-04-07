@@ -10,13 +10,13 @@ import { DefaultRootStateProps } from 'types';
 
 // ----------------------------------------------------------------------
 
-const initialState: DefaultRootStateProps['waring'] = {
+const initialState: DefaultRootStateProps['venue'] = {
     error: null,
-    waringS1: []
+    venueS1: []
 };
 
 const slice = createSlice({
-    name: 'waring',
+    name: 'venue',
     initialState,
     reducers: {
         // HAS ERROR
@@ -25,8 +25,9 @@ const slice = createSlice({
         },
 
         // GET USERS STYLE 1
-        getWaringListSuccess(state, action) {
-            state.waringS1 = action.payload;
+        getVenueListSuccess(state, action) {
+            console.log('action', action);
+            state.venueS1 = action.payload;
         }
     }
 });
@@ -36,13 +37,12 @@ export default slice.reducer;
 
 // ----------------------------------------------------------------------
 
-export function getLogList() {
+export function getVenueList() {
     return async () => {
         try {
-            console.log('getWaringList');
-            const response = await axios.get('/api/action/list');
-            console.log('response------------------>', response);
-            dispatch(slice.actions.getWaringListSuccess(response.data.log_s1));
+            const response = await axios.get('/api/venue/list');
+            console.log('response---------->', response);
+            dispatch(slice.actions.getVenueListSuccess(response.data.venue_s1));
         } catch (error) {
             dispatch(slice.actions.hasError(error));
         }

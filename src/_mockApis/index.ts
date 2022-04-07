@@ -16,3 +16,4 @@ import './kanban';
 // add
 
 import './waring';
+import './venue';

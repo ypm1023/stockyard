@@ -134,6 +134,7 @@ const SamplePage = Loadable(lazy(() => import('views/sample-page')));
 // add
 const WaringPage = Loadable(lazy(() => import('views/report/waring')));
 const LogPage = Loadable(lazy(() => import('views/report/log')));
+const VenuePage = Loadable(lazy(() => import('views/report/venue')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -152,6 +153,10 @@ const MainRoutes = {
         {
             path: '/log/list',
             element: <LogPage />
+        },
+        {
+            path: '/venue/list',
+            element: <VenuePage />
         },
         {
             path: '/widget/statistics',

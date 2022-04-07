@@ -20,6 +20,7 @@ import { UserStateProps } from './user';
 
 import { SnackbarProps } from './snackbar';
 import { WaringStateProps } from './waring';
+import { VenueStateProps } from './venue';
 // import { ActionLogStateProps } from './log';
 
 declare module '@mui/styles/defaultTheme' {
@@ -123,6 +124,7 @@ export interface DefaultRootStateProps {
     calendar: CalendarStateProps;
     mail: MailStateProps;
     user: UserStateProps;
+    venue: VenueStateProps;
     waring: WaringStateProps;
     // actionLog: ActionLogStateProps;
 }
