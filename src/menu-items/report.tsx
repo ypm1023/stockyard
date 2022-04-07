@@ -27,7 +27,7 @@ const report = {
             title: '日志信息',
             icon: icons.IconClipboardList,
             type: 'item',
-            url: '/action/list'
+            url: '/log/list'
         },
         {
             id: 'site',

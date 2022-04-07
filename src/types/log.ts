@@ -1,4 +1,4 @@
-export interface ActionLogStateProps {
+export interface LogStateProps {
     error: object | string | null;
-    actionLogS1: any[];
+    logS1: any[];
 }

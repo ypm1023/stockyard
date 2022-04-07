@@ -49,7 +49,9 @@ const WaringList = () => {
                     {data &&
                         data.map((row, index) => (
                             <TableRow hover key={index}>
-                                <TableCell>{row.type}</TableCell>
+                                <TableCell align="left" sx={{ pl: 3 }}>
+                                    {row.type}
+                                </TableCell>
                                 <TableCell>{row.time}</TableCell>
                                 <TableCell>
                                     {row.status === 'Active' && (

@@ -21,6 +21,7 @@ import { UserStateProps } from './user';
 import { SnackbarProps } from './snackbar';
 import { WaringStateProps } from './waring';
 import { VenueStateProps } from './venue';
+import { LogStateProps } from './log';
 // import { ActionLogStateProps } from './log';
 
 declare module '@mui/styles/defaultTheme' {
@@ -126,6 +127,7 @@ export interface DefaultRootStateProps {
     user: UserStateProps;
     venue: VenueStateProps;
     waring: WaringStateProps;
+    log: LogStateProps;
     // actionLog: ActionLogStateProps;
 }
 

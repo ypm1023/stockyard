@@ -17,6 +17,7 @@ import kanbanReducer from './slices/kanban';
 import menuReducer from './slices/menu';
 import waringReducer from './slices/waring';
 import venueReducer from './slices/venue';
+import logReducer from './slices/log';
 
 // ==============================|| COMBINE REDUCER ||============================== //
 
@@ -40,7 +41,8 @@ const reducer = combineReducers({
     user: userReducer,
     menu: menuReducer,
     waring: waringReducer,
-    venue: venueReducer
+    venue: venueReducer,
+    log: logReducer
 });
 
 export default reducer;
