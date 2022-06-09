@@ -50,11 +50,11 @@ const FirebaseRegister = ({ ...others }) => {
 
     const [strength, setStrength] = React.useState(0);
     const [level, setLevel] = React.useState<StringColorProps>();
-    const { firebaseRegister, firebaseGoogleSignIn } = useAuth();
+    const { login } = useAuth();
 
     const googleHandler = async () => {
         try {
-            await firebaseGoogleSignIn();
+            // await firebaseGoogleSignIn();
         } catch (err) {
             console.error(err);
         }
@@ -146,7 +146,7 @@ const FirebaseRegister = ({ ...others }) => {
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
-                        await firebaseRegister(values.email, values.password).then(
+                        await login(values.email, values.password).then(
                             () => {
                                 // WARNING: do not set any formik state here as formik might be already destroyed here. You may get following error by doing so.
                                 // Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application.

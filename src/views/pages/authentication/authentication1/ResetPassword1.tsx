@@ -99,18 +99,18 @@ const ResetPassword = () => {
                                                 gutterBottom
                                                 variant={matchDownSM ? 'h3' : 'h2'}
                                             >
-                                                Reset Password
+                                                重置密码
                                             </Typography>
                                             <Typography color="textPrimary" gutterBottom variant="h4">
-                                                Please choose new password.
+                                                请输入新密码
                                             </Typography>
                                         </Stack>
                                     </Grid>
-                                    <Grid item sx={{ mb: { xs: 3, sm: 0 } }}>
+                                    {/* <Grid item sx={{ mb: { xs: 3, sm: 0 } }}>
                                         <Link to="#">
                                             <Logo />
                                         </Link>
-                                    </Grid>
+                                    </Grid> */}
                                 </Grid>
                             </Grid>
                             <Grid item xs={12}>
@@ -126,13 +126,13 @@ const ResetPassword = () => {
                                 <span />
                                 <PurpleWrapper />
                             </Grid>
-                            <Grid item xs={12}>
+                            {/* <Grid item xs={12}>
                                 <Grid item container justifyContent="center" sx={{ pb: 8 }}>
                                     <Grid item xs={10} lg={8} sx={{ '& .slick-list': { pb: 2 } }}>
                                         <AuthSlider items={items} />
                                     </Grid>
                                 </Grid>
-                            </Grid>
+                            </Grid> */}
                         </Grid>
                     </BackgroundPattern1>
                 </Grid>

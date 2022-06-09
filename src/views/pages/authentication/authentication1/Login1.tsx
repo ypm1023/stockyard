@@ -83,23 +83,6 @@ const Login = () => {
                                     alignItems={matchDownSM ? 'center' : 'inherit'}
                                     justifyContent={matchDownSM ? 'center' : 'space-between'}
                                 >
-                                    <Grid item>
-                                        <Stack
-                                            justifyContent={matchDownSM ? 'center' : 'flex-start'}
-                                            textAlign={matchDownSM ? 'center' : 'inherit'}
-                                        >
-                                            <Typography
-                                                color={theme.palette.secondary.main}
-                                                gutterBottom
-                                                variant={matchDownSM ? 'h3' : 'h2'}
-                                            >
-                                                Hi, Welcome Back
-                                            </Typography>
-                                            <Typography color="textPrimary" gutterBottom variant="h4">
-                                                Login in to your account
-                                            </Typography>
-                                        </Stack>
-                                    </Grid>
                                     <Grid item sx={{ mb: { xs: 3, sm: 0 } }}>
                                         <Link to="#">
                                             <Logo />
@@ -112,18 +95,6 @@ const Login = () => {
                             </Grid>
                             <Grid item xs={12}>
                                 <Divider />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Grid item container direction="column" alignItems="flex-end" xs={12}>
-                                    <Typography
-                                        component={Link}
-                                        to="/pages/register/register1"
-                                        variant="subtitle1"
-                                        sx={{ textDecoration: 'none' }}
-                                    >
-                                        Don&apos;t have an account?
-                                    </Typography>
-                                </Grid>
                             </Grid>
                         </Grid>
                     </AuthCardWrapper>

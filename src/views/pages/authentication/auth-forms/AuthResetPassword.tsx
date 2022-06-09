@@ -2,18 +2,7 @@ import React, { useEffect } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import {
-    Box,
-    Button,
-    FormControl,
-    FormHelperText,
-    Grid,
-    IconButton,
-    InputAdornment,
-    InputLabel,
-    OutlinedInput,
-    Typography
-} from '@mui/material';
+import { Box, Button, FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput } from '@mui/material';
 
 // third party
 import * as Yup from 'yup';
@@ -28,7 +17,6 @@ import { strengthColor, strengthIndicator } from 'utils/password-strength';
 // assets
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { StringColorProps } from 'types';
 
 // ========================|| FIREBASE - RESET PASSWORD ||======================== //
 
@@ -36,8 +24,6 @@ const AuthResetPassword = ({ ...others }) => {
     const theme = useTheme();
     const scriptedRef = useScriptRef();
     const [showPassword, setShowPassword] = React.useState(false);
-    const [strength, setStrength] = React.useState(0);
-    const [level, setLevel] = React.useState<StringColorProps>();
 
     // const { firebaseEmailPasswordSignIn } = useAuth();
 
@@ -49,15 +35,15 @@ const AuthResetPassword = ({ ...others }) => {
         event.preventDefault();
     };
 
-    const changePassword = (value: string) => {
-        const temp = strengthIndicator(value);
-        setStrength(temp);
-        setLevel(strengthColor(temp));
-    };
+    // const changePassword = (value: string) => {
+    //     // const temp = strengthIndicator(value);
+    //     // setStrength(temp);
+    //     // setLevel(strengthColor(temp));
+    // };
 
-    useEffect(() => {
-        changePassword('123456');
-    }, []);
+    // useEffect(() => {
+    //     changePassword('123456');
+    // }, []);
 
     return (
         <Formik
@@ -68,10 +54,10 @@ const AuthResetPassword = ({ ...others }) => {
                 submit: null
             }}
             validationSchema={Yup.object().shape({
-                password: Yup.string().max(255).required('Password is required'),
+                password: Yup.string().max(255).required('请输入密码!'),
                 confirmPassword: Yup.string().when('password', {
                     is: (val: string) => !!(val && val.length > 0),
-                    then: Yup.string().oneOf([Yup.ref('password')], 'Both Password must be match!')
+                    then: Yup.string().oneOf([Yup.ref('password')], '密码与确认密码不相同')
                 })
             })}
             onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
@@ -94,7 +80,7 @@ const AuthResetPassword = ({ ...others }) => {
             {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                 <form noValidate onSubmit={handleSubmit} {...others}>
                     <FormControl fullWidth error={Boolean(touched.password && errors.password)} sx={{ ...theme.typography.customInput }}>
-                        <InputLabel htmlFor="outlined-adornment-password-reset">Password</InputLabel>
+                        <InputLabel htmlFor="outlined-adornment-password-reset">密码</InputLabel>
                         <OutlinedInput
                             id="outlined-adornment-password-reset"
                             type={showPassword ? 'text' : 'password'}
@@ -103,7 +89,7 @@ const AuthResetPassword = ({ ...others }) => {
                             onBlur={handleBlur}
                             onChange={(e) => {
                                 handleChange(e);
-                                changePassword(e.target.value);
+                                // changePassword(e.target.value);
                             }}
                             endAdornment={
                                 <InputAdornment position="end">
@@ -128,36 +114,12 @@ const AuthResetPassword = ({ ...others }) => {
                             </FormHelperText>
                         </FormControl>
                     )}
-                    {strength !== 0 && (
-                        <FormControl fullWidth>
-                            <Box sx={{ mb: 2 }}>
-                                <Grid container spacing={2} alignItems="center">
-                                    <Grid item>
-                                        <Box
-                                            style={{ backgroundColor: level?.color }}
-                                            sx={{
-                                                width: 85,
-                                                height: 8,
-                                                borderRadius: '7px'
-                                            }}
-                                        />
-                                    </Grid>
-                                    <Grid item>
-                                        <Typography variant="subtitle1" fontSize="0.75rem">
-                                            {level?.label}
-                                        </Typography>
-                                    </Grid>
-                                </Grid>
-                            </Box>
-                        </FormControl>
-                    )}
-
                     <FormControl
                         fullWidth
                         error={Boolean(touched.confirmPassword && errors.confirmPassword)}
                         sx={{ ...theme.typography.customInput }}
                     >
-                        <InputLabel htmlFor="outlined-adornment-confirm-password">Confirm Password</InputLabel>
+                        <InputLabel htmlFor="outlined-adornment-confirm-password">确认密码</InputLabel>
                         <OutlinedInput
                             id="outlined-adornment-confirm-password"
                             type="password"
@@ -203,7 +165,7 @@ const AuthResetPassword = ({ ...others }) => {
                                 variant="contained"
                                 color="secondary"
                             >
-                                Reset Password
+                                重置密码
                             </Button>
                         </AnimateButton>
                     </Box>

@@ -30,7 +30,6 @@ const VenueList = () => {
         setData(venueS1);
     }, [venueS1]);
 
-    console.log('data~~~~~~~~~~~~~~~~~~~', data);
     return (
         <TableContainer>
             <Table>
@@ -53,7 +52,22 @@ const VenueList = () => {
                             <TableRow hover key={index}>
                                 <TableCell sx={{ pl: 3 }}>{row.name}</TableCell>
                                 <TableCell>{row.type}</TableCell>
-                                <TableCell>{row.cameras}</TableCell>
+                                <TableCell>
+                                    {row.cameras.map((item: string) => (
+                                        <Chip
+                                            label={item}
+                                            size="small"
+                                            sx={{
+                                                mr: 2,
+                                                background:
+                                                    theme.palette.mode === 'dark'
+                                                        ? theme.palette.dark.main
+                                                        : theme.palette.success.light + 60,
+                                                color: theme.palette.success.dark
+                                            }}
+                                        />
+                                    ))}
+                                </TableCell>
                                 <TableCell>
                                     {row.status === 'Active' && (
                                         <Chip
@@ -82,26 +96,24 @@ const VenueList = () => {
                                 </TableCell>
                                 <TableCell align="left" sx={{ pl: 3 }}>
                                     <Stack direction="row" justifyContent="left" alignItems="center">
-                                        <Tooltip placement="top" title="查看报警视频">
+                                        <Tooltip placement="top" title="修改产地信息">
                                             <IconButton color="primary" aria-label="delete" size="large">
                                                 <EditTwoTone sx={{ fontSize: '1.5rem' }} />
                                             </IconButton>
                                         </Tooltip>
-                                        {row.status === 'Pending' && (
-                                            <Tooltip placement="top" title="审核报警信息">
-                                                <IconButton
-                                                    color="primary"
-                                                    sx={{
-                                                        color: theme.palette.orange.dark,
-                                                        borderColor: theme.palette.orange.main,
-                                                        '&:hover ': { background: theme.palette.orange.light }
-                                                    }}
-                                                    size="large"
-                                                >
-                                                    <DeleteOutlineTwoTone sx={{ fontSize: '1.5rem' }} />
-                                                </IconButton>
-                                            </Tooltip>
-                                        )}
+                                        <Tooltip placement="top" title="删除场地信息">
+                                            <IconButton
+                                                color="primary"
+                                                sx={{
+                                                    color: theme.palette.orange.dark,
+                                                    borderColor: theme.palette.orange.main,
+                                                    '&:hover ': { background: theme.palette.orange.light }
+                                                }}
+                                                size="large"
+                                            >
+                                                <DeleteOutlineTwoTone sx={{ fontSize: '1.5rem' }} />
+                                            </IconButton>
+                                        </Tooltip>
                                     </Stack>
                                 </TableCell>
                             </TableRow>

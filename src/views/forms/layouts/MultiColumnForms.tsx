@@ -355,9 +355,7 @@ function ColumnsLayouts() {
                         <Grid item xs={12} lg={4}>
                             <Grid container spacing={2} alignItems="center">
                                 <Grid item xs={12} sm={3} lg={4} sx={{ pt: { xs: 2, sm: '0 !important' } }}>
-                                    <InputLabel horizontal sx={{ textAlign: { xs: 'left', sm: 'right' } }}>
-                                        User Type :
-                                    </InputLabel>
+                                    <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>User Type :</InputLabel>
                                 </Grid>
                                 <Grid item xs={12} sm={9} lg={8}>
                                     <RadioGroup aria-label="gender" name="controlled-radio-buttons-group">

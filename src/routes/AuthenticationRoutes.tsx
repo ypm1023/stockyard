@@ -21,12 +21,12 @@ const AuthResetPassword2 = Loadable(lazy(() => import('views/pages/authenticatio
 const AuthCodeVerification2 = Loadable(lazy(() => import('views/pages/authentication/authentication2/CodeVerification2')));
 
 // login option 3 routing
-const AuthLogin3 = Loadable(lazy(() => import('views/pages/authentication/authentication3/Login3')));
-const AuthRegister3 = Loadable(lazy(() => import('views/pages/authentication/authentication3/Register3')));
-const AuthForgotPassword3 = Loadable(lazy(() => import('views/pages/authentication/authentication3/ForgotPassword3')));
-const AuthCheckMail3 = Loadable(lazy(() => import('views/pages/authentication/authentication3/CheckMail3')));
-const AuthResetPassword3 = Loadable(lazy(() => import('views/pages/authentication/authentication3/ResetPassword3')));
-const AuthCodeVerification3 = Loadable(lazy(() => import('views/pages/authentication/authentication3/CodeVerification3')));
+const AuthLogin3 = Loadable(lazy(() => import('views/pages/authentication/authentication/Login')));
+const AuthRegister3 = Loadable(lazy(() => import('views/pages/authentication/authentication/Register')));
+const AuthForgotPassword3 = Loadable(lazy(() => import('views/pages/authentication/authentication/ForgotPassword')));
+const AuthCheckMail3 = Loadable(lazy(() => import('views/pages/authentication/authentication/CheckMail')));
+const AuthResetPassword3 = Loadable(lazy(() => import('views/pages/authentication/authentication/ResetPassword')));
+const AuthCodeVerification3 = Loadable(lazy(() => import('views/pages/authentication/authentication/CodeVerification')));
 
 // maintenance routing
 const MaintenanceError = Loadable(lazy(() => import('views/pages/maintenance/Error')));
@@ -47,7 +47,7 @@ const AuthenticationRoutes = {
     element: <MinimalLayout />,
     children: [
         {
-            path: '/pages/login/login1',
+            path: '/pages/login/logixxxxx',
             element: <AuthLogin1 />
         },
         {
@@ -97,7 +97,7 @@ const AuthenticationRoutes = {
         },
 
         {
-            path: '/pages/login/login3',
+            path: '/pages/login/login32222',
             element: <AuthLogin3 />
         },
         {

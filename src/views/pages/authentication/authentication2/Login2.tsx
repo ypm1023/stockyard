@@ -69,24 +69,6 @@ const Login = () => {
                                 </Box>
                                 <AuthCardWrapper border={matchDownMD}>
                                     <Grid container spacing={2} justifyContent="center">
-                                        <Grid item>
-                                            <Stack alignItems="center" justifyContent="center" spacing={1}>
-                                                <Typography
-                                                    color={theme.palette.secondary.main}
-                                                    gutterBottom
-                                                    variant={matchDownSM ? 'h3' : 'h2'}
-                                                >
-                                                    Hi, Welcome Back
-                                                </Typography>
-                                                <Typography
-                                                    variant="caption"
-                                                    fontSize="16px"
-                                                    textAlign={matchDownSM ? 'center' : 'inherit'}
-                                                >
-                                                    Enter your credentials to continue
-                                                </Typography>
-                                            </Stack>
-                                        </Grid>
                                         <Grid item xs={12}>
                                             <AuthLogin loginProp={2} />
                                         </Grid>

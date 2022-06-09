@@ -37,11 +37,11 @@ services.onPost('/api/account/login').reply(async (request) => {
         const user = users.find((_user) => _user.email === email);
 
         if (!user) {
-            return [400, { message: 'Verify Your Email & Password' }];
+            return [400, { message: '手机号错误!' }];
         }
 
         if (user.password !== password) {
-            return [400, { message: 'Invalid Password' }];
+            return [400, { message: '密码错误!' }];
         }
 
         const serviceToken = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: JWT_EXPIRES_TIME });

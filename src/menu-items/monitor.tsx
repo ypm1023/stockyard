@@ -3,19 +3,19 @@ import { IconSitemap } from '@tabler/icons';
 
 // ==============================|| APPLICATION MENU ITEMS ||============================== //
 
-const transportation = {
-    id: 'transportation',
+const monitor = {
+    id: 'monitor',
     // title: <FormattedMessage id="application" />,
     type: 'group',
     children: [
         {
-            id: 'transportation',
-            title: '运输信息',
+            id: 'monitor',
+            title: '监控中心',
             icon: IconSitemap,
             type: 'item',
-            url: '/user/list'
+            url: '/monitor/page'
         }
     ]
 };
 
-export default transportation;
+export default monitor;

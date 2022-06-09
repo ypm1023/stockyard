@@ -126,6 +126,7 @@ export const JWTProvider = ({ children }: { children: React.ReactElement }) => {
 
     const logout = () => {
         setSession(null);
+        console.log('logout-------------------->');
         dispatch({ type: LOGOUT });
     };
 

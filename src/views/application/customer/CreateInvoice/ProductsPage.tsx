@@ -1,5 +1,5 @@
 // material-ui
-import { Grid, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import { Grid, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 
 // ==============================|| PRODUCTS-DATA PAGE ||============================== //
@@ -13,27 +13,20 @@ function ProductsPage({ productsData, deleteProductHandler }: any) {
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell sx={{ pl: 3 }}>Description</TableCell>
-                                    <TableCell align="right">Quantity</TableCell>
-                                    <TableCell align="right">Amount</TableCell>
-                                    <TableCell align="right">Total</TableCell>
+                                    <TableCell sx={{ pl: 3 }}>关联设备</TableCell>
+                                    <TableCell>设备类型</TableCell>
+                                    <TableCell>设备IP</TableCell>
+                                    <TableCell>状态</TableCell>
                                     <TableCell align="right" sx={{ pr: 3 }} />
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                                 {productsData.map((row: any, index: any) => (
                                     <TableRow key={index}>
-                                        <TableCell sx={{ pl: 3 }}>
-                                            <Typography align="left" variant="subtitle1">
-                                                {row.product}
-                                            </Typography>
-                                            <Typography align="left" variant="body2">
-                                                {row.description}
-                                            </Typography>
-                                        </TableCell>
-                                        <TableCell align="right">{row.quantity}</TableCell>
-                                        <TableCell align="right">${row.amount}</TableCell>
-                                        <TableCell align="right">${row.total}</TableCell>
+                                        <TableCell sx={{ pl: 3 }}>{row.product}</TableCell>
+                                        <TableCell>{row.quantity}</TableCell>
+                                        <TableCell>{row.amount}</TableCell>
+                                        <TableCell>{row.total}</TableCell>
                                         <TableCell sx={{ pr: 1 }} align="right">
                                             <IconButton color="error" size="small" onClick={() => deleteProductHandler(row.id)}>
                                                 <DeleteTwoToneIcon fontSize="small" />

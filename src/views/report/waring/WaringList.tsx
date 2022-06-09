@@ -40,6 +40,7 @@ const WaringList = () => {
                         <TableCell>警报时间</TableCell>
                         <TableCell>警报状态</TableCell>
                         <TableCell>处理人</TableCell>
+                        <TableCell>处理时间</TableCell>
                         <TableCell align="left" sx={{ pl: 4 }}>
                             操作
                         </TableCell>
@@ -80,6 +81,7 @@ const WaringList = () => {
                                     )}
                                 </TableCell>
                                 <TableCell>{row.handle}</TableCell>
+                                <TableCell>{row.time}</TableCell>
                                 <TableCell align="left" sx={{ pr: 3 }}>
                                     <Stack direction="row" justifyContent="left" alignItems="center">
                                         <Tooltip placement="top" title="查看报警视频">

@@ -2,17 +2,31 @@ import React from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Button, Grid, InputAdornment, Menu, MenuItem, OutlinedInput, Pagination, Typography } from '@mui/material';
+import {
+    Button,
+    CardContent,
+    Grid,
+    IconButton,
+    InputAdornment,
+    Menu,
+    MenuItem,
+    Pagination,
+    TextField,
+    Tooltip,
+    Typography,
+    Fab
+} from '@mui/material';
 
 // project imports
 import UserList from './UserList';
 import MainCard from 'ui-component/cards/MainCard';
 import { gridSpacing } from 'store/constant';
 
-// assets
-import { IconSearch } from '@tabler/icons';
+// assets;
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
-
+import FilterListIcon from '@mui/icons-material/FilterListTwoTone';
+import SearchIcon from '@mui/icons-material/Search';
+import AddIcon from '@mui/icons-material/AddTwoTone';
 // ==============================|| USER LIST STYLE 1 ||============================== //
 
 const ListStylePage1 = () => {
@@ -32,22 +46,41 @@ const ListStylePage1 = () => {
                     <Grid item>
                         <Typography variant="h3">用户列表</Typography>
                     </Grid>
-                    <Grid item>
-                        <OutlinedInput
-                            id="input-search-list-style1"
-                            placeholder="搜索"
-                            startAdornment={
-                                <InputAdornment position="start">
-                                    <IconSearch stroke={1.5} size="1rem" />
-                                </InputAdornment>
-                            }
-                            size="small"
-                        />
-                    </Grid>
                 </Grid>
             }
             content={false}
         >
+            <CardContent>
+                <Grid container justifyContent="space-between" alignItems="center" spacing={2}>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <SearchIcon fontSize="small" />
+                                    </InputAdornment>
+                                )
+                            }}
+                            placeholder="搜索"
+                            size="small"
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6} sx={{ textAlign: 'right' }}>
+                        <Tooltip title="筛选">
+                            <IconButton size="large">
+                                <FilterListIcon />
+                            </IconButton>
+                        </Tooltip>
+
+                        {/* product add & dialog */}
+                        <Tooltip title="新建用户">
+                            <Fab color="primary" size="small" sx={{ boxShadow: 'none', ml: 1, width: 32, height: 32, minHeight: 32 }}>
+                                <AddIcon fontSize="small" />
+                            </Fab>
+                        </Tooltip>
+                    </Grid>
+                </Grid>
+            </CardContent>
             <UserList />
             <Grid item xs={12} sx={{ p: 3 }}>
                 <Grid container justifyContent="space-between" spacing={gridSpacing}>

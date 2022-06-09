@@ -198,7 +198,7 @@ const ComingSoon1 = () => {
                                     <Grid container spacing={2}>
                                         <Grid item xs={12}>
                                             <Typography variant="h1" component="div">
-                                                Berry - The React Admin Template
+                                                智慧料场系统
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={12}>

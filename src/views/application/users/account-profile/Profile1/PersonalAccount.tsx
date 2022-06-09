@@ -1,6 +1,6 @@
 import { useTheme } from '@mui/material/styles';
 // material-ui
-import { Button, Grid, TextField, Divider } from '@mui/material';
+import { Button, Grid, TextField, Divider, Autocomplete } from '@mui/material';
 
 // project imports
 import useAuth from 'hooks/useAuth';
@@ -9,6 +9,12 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 import { gridSpacing } from 'store/constant';
 
 // ==============================|| PROFILE 1 - PROFILE ACCOUNT ||============================== //
+
+// autocomplete options
+const roleFilms = [
+    { label: '管理员', id: 1 },
+    { label: '操作员', id: 2 }
+];
 
 const PersonalAccount = () => {
     const { user } = useAuth();
@@ -24,7 +30,12 @@ const PersonalAccount = () => {
                                 <TextField id="outlined-basic1" fullWidth label="姓名" defaultValue={user?.name} />
                             </Grid>
                             <Grid item xs={12} md={6}>
-                                <TextField id="outlined-select-currency" fullWidth label="所在部门" />
+                                <Autocomplete
+                                    disablePortal
+                                    options={roleFilms}
+                                    defaultValue={roleFilms[0]}
+                                    renderInput={(params) => <TextField {...params} label="角色" />}
+                                />
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField

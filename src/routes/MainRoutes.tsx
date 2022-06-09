@@ -136,6 +136,8 @@ const WaringPage = Loadable(lazy(() => import('views/report/waring')));
 const LogPage = Loadable(lazy(() => import('views/report/log')));
 const VenuePage = Loadable(lazy(() => import('views/report/venue')));
 
+const TransportPage = Loadable(lazy(() => import('views/transport')));
+
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -147,6 +149,10 @@ const MainRoutes = {
     ),
     children: [
         {
+            path: '/',
+            element: <DashboardDefault />
+        },
+        {
             path: '/waring/list',
             element: <WaringPage />
         },
@@ -157,6 +163,10 @@ const MainRoutes = {
         {
             path: '/venue/list',
             element: <VenuePage />
+        },
+        {
+            path: '/transport/list',
+            element: <TransportPage />
         },
         {
             path: '/widget/statistics',
