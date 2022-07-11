@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useReducer } from 'react';
 
 // third-party
-import { Chance } from 'chance';
 import jwtDecode from 'jwt-decode';
 
 // reducer - state management
@@ -15,8 +14,6 @@ import axios from 'utils/axios';
 // types
 import { KeyedObject } from 'types';
 import { InitialLoginContextProps, JWTContextType } from 'types/auth';
-
-const chance = new Chance();
 
 // constant
 const initialState: InitialLoginContextProps = {
@@ -39,7 +36,7 @@ const verifyToken: (st: string) => boolean = (serviceToken) => {
 const setSession = (serviceToken?: string | null) => {
     if (serviceToken) {
         localStorage.setItem('serviceToken', serviceToken);
-        axios.defaults.headers.common.Authorization = `Bearer ${serviceToken}`;
+        axios.defaults.headers.common.Authorization = `${serviceToken}`;
     } else {
         localStorage.removeItem('serviceToken');
         delete axios.defaults.headers.common.Authorization;
@@ -58,7 +55,7 @@ export const JWTProvider = ({ children }: { children: React.ReactElement }) => {
                 const serviceToken = window.localStorage.getItem('serviceToken');
                 if (serviceToken && verifyToken(serviceToken)) {
                     setSession(serviceToken);
-                    const response = await axios.get('/api/account/me');
+                    const response = await axios.get('/api/account/find');
                     const { user } = response.data;
                     dispatch({
                         type: LOGIN,
@@ -83,45 +80,44 @@ export const JWTProvider = ({ children }: { children: React.ReactElement }) => {
         init();
     }, []);
 
-    const login = async (email: string, password: string) => {
-        const response = await axios.post('/api/account/login', { email, password });
-        const { serviceToken, user } = response.data;
-        setSession(serviceToken);
-        dispatch({
-            type: LOGIN,
-            payload: {
-                isLoggedIn: true,
-                user
+    const login = async (loginName: string, encodePwd: string) => {
+        try {
+            const response = await axios.post('/api/login', { loginName, encodePwd });
+            const { data, user, code } = response.data;
+            if (code === -1) {
+                // eslint-disable-next-line no-throw-literal
+                throw code; // eslint-disable-line @typescript-eslint/no-throw-literal
+            } else {
+                setSession(data);
+                dispatch({
+                    type: LOGIN,
+                    payload: {
+                        isLoggedIn: true,
+                        user
+                    }
+                });
             }
-        });
+        } catch (e) {
+            // eslint-disable-next-line no-throw-literal
+            throw { message: '用户名或密码错误!' }; // eslint-disable-line @typescript-eslint/no-throw-literal
+        }
     };
 
-    const register = async (email: string, password: string, firstName: string, lastName: string) => {
-        // todo: this flow need to be recode as it not verified
-        const id = chance.bb_pin();
-        const response = await axios.post('/api/account/register', {
-            id,
+    const register = async (userName: string, email: string, backgroundIntroduction: string, phone: string, role: number) => {
+        const response = await axios.post('/api/account/save', {
+            userName,
             email,
-            password,
-            firstName,
-            lastName
+            backgroundIntroduction,
+            phone,
+            role
         });
-        let users = response.data;
-
-        if (window.localStorage.getItem('users') !== undefined && window.localStorage.getItem('users') !== null) {
-            const localUsers = window.localStorage.getItem('users');
-            users = [
-                ...JSON.parse(localUsers!),
-                {
-                    id,
-                    email,
-                    password,
-                    name: `${firstName} ${lastName}`
-                }
-            ];
+        const { code, users } = response.data;
+        if (code === -1) {
+            // eslint-disable-next-line no-throw-literal
+            throw code; // eslint-disable-line @typescript-eslint/no-throw-literal
+        } else {
+            window.localStorage.setItem('users', JSON.stringify(users));
         }
-
-        window.localStorage.setItem('users', JSON.stringify(users));
     };
 
     const logout = () => {

@@ -151,10 +151,10 @@ export default slice.reducer;
 
 // ----------------------------------------------------------------------
 
-export function getUsersListStyle1() {
+export function getUsersList() {
     return async () => {
         try {
-            const response = await axios.get('/api/user-list/s1/list');
+            const response = await axios.get('/api/account/list');
             console.log('response-------------', response);
             dispatch(slice.actions.getUsersListStyle1Success(response.data.users_s1));
         } catch (error) {

@@ -10,7 +10,6 @@ import { Formik } from 'formik';
 
 // project imports
 // import useAuth from 'hooks/useAuth';
-import useScriptRef from 'hooks/useScriptRef';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 
 // assets
@@ -21,7 +20,6 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const AuthResetPassword = ({ ...others }) => {
     const theme = useTheme();
-    const scriptedRef = useScriptRef();
     const [showPassword, setShowPassword] = React.useState(false);
 
     // const { firebaseEmailPasswordSignIn } = useAuth();
@@ -62,17 +60,15 @@ const AuthResetPassword = ({ ...others }) => {
             onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                 try {
                     // await firebaseEmailPasswordSignIn(values.email, values.password);
-                    if (scriptedRef.current) {
-                        setStatus({ success: true });
-                        setSubmitting(false);
-                    }
+
+                    setStatus({ success: true });
+                    setSubmitting(false);
                 } catch (err: any) {
                     console.error(err);
-                    if (scriptedRef.current) {
-                        setStatus({ success: false });
-                        setErrors({ submit: err.message });
-                        setSubmitting(false);
-                    }
+
+                    setStatus({ success: false });
+                    setErrors({ submit: err.message });
+                    setSubmitting(false);
                 }
             }}
         >

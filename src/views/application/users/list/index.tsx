@@ -1,21 +1,7 @@
 import React from 'react';
-
+import { useNavigate } from 'react-router-dom';
 // material-ui
-import { useTheme } from '@mui/material/styles';
-import {
-    Button,
-    CardContent,
-    Grid,
-    IconButton,
-    InputAdornment,
-    Menu,
-    MenuItem,
-    Pagination,
-    TextField,
-    Tooltip,
-    Typography,
-    Fab
-} from '@mui/material';
+import { CardContent, Grid, IconButton, InputAdornment, Pagination, TextField, Tooltip, Typography, Fab } from '@mui/material';
 
 // project imports
 import UserList from './UserList';
@@ -23,22 +9,22 @@ import MainCard from 'ui-component/cards/MainCard';
 import { gridSpacing } from 'store/constant';
 
 // assets;
-import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import FilterListIcon from '@mui/icons-material/FilterListTwoTone';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/AddTwoTone';
 // ==============================|| USER LIST STYLE 1 ||============================== //
 
-const ListStylePage1 = () => {
-    const theme = useTheme();
-    const [anchorEl, setAnchorEl] = React.useState<Element | ((element: Element) => Element) | null | undefined>(null);
-    const handleClick = (event: React.MouseEvent) => {
-        setAnchorEl(event.currentTarget);
+const ListStylePage = () => {
+    const navigate = useNavigate();
+    // const theme = useTheme();
+    const handleAddAccountClick = () => {
+        const route: string = '/user/add';
+
+        if (route && route !== '') {
+            navigate(route);
+        }
     };
 
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
     return (
         <MainCard
             title={
@@ -74,7 +60,12 @@ const ListStylePage1 = () => {
 
                         {/* product add & dialog */}
                         <Tooltip title="新建用户">
-                            <Fab color="primary" size="small" sx={{ boxShadow: 'none', ml: 1, width: 32, height: 32, minHeight: 32 }}>
+                            <Fab
+                                color="primary"
+                                onClick={handleAddAccountClick}
+                                size="small"
+                                sx={{ boxShadow: 'none', ml: 1, width: 32, height: 32, minHeight: 32 }}
+                            >
                                 <AddIcon fontSize="small" />
                             </Fab>
                         </Tooltip>
@@ -84,44 +75,13 @@ const ListStylePage1 = () => {
             <UserList />
             <Grid item xs={12} sx={{ p: 3 }}>
                 <Grid container justifyContent="space-between" spacing={gridSpacing}>
+                    <Grid item />
                     <Grid item>
-                        <Pagination count={10} color="primary" />
-                    </Grid>
-                    <Grid item>
-                        <Button
-                            size="large"
-                            sx={{ color: theme.palette.grey[900] }}
-                            color="secondary"
-                            endIcon={<ExpandMoreRoundedIcon />}
-                            onClick={handleClick}
-                        >
-                            10 条
-                        </Button>
-                        <Menu
-                            id="menu-user-list-style1"
-                            anchorEl={anchorEl}
-                            keepMounted
-                            open={Boolean(anchorEl)}
-                            onClose={handleClose}
-                            variant="selectedMenu"
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right'
-                            }}
-                            transformOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'right'
-                            }}
-                        >
-                            <MenuItem onClick={handleClose}> 10 条</MenuItem>
-                            <MenuItem onClick={handleClose}> 20 条</MenuItem>
-                            <MenuItem onClick={handleClose}> 30 条</MenuItem>
-                        </Menu>
+                        <Pagination count={1} color="primary" />
                     </Grid>
                 </Grid>
             </Grid>
         </MainCard>
     );
 };
-
-export default ListStylePage1;
+export default ListStylePage;

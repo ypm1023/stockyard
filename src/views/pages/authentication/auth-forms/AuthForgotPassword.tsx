@@ -11,14 +11,12 @@ import { Formik } from 'formik';
 // project imports
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import useAuth from 'hooks/useAuth';
-import useScriptRef from 'hooks/useScriptRef';
 import { openSnackbar } from 'store/slices/snackbar';
 
 // ========================|| FIREBASE - FORGOT PASSWORD ||======================== //
 
 const AuthForgotPassword = ({ ...others }) => {
     const theme = useTheme();
-    const scriptedRef = useScriptRef();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -38,31 +36,28 @@ const AuthForgotPassword = ({ ...others }) => {
                 try {
                     await resetPassword(values.email);
 
-                    if (scriptedRef.current) {
-                        setStatus({ success: true });
-                        setSubmitting(false);
-                        dispatch(
-                            openSnackbar({
-                                open: true,
-                                message: 'Check mail for reset password link',
-                                variant: 'alert',
-                                alert: {
-                                    color: 'success'
-                                },
-                                close: false
-                            })
-                        );
-                        setTimeout(() => {
-                            navigate('/login', { replace: true });
-                        }, 1500);
-                    }
+                    setStatus({ success: true });
+                    setSubmitting(false);
+                    dispatch(
+                        openSnackbar({
+                            open: true,
+                            message: 'Check mail for reset password link',
+                            variant: 'alert',
+                            alert: {
+                                color: 'success'
+                            },
+                            close: false
+                        })
+                    );
+                    setTimeout(() => {
+                        navigate('/login', { replace: true });
+                    }, 1500);
                 } catch (err: any) {
                     console.error(err);
-                    if (scriptedRef.current) {
-                        setStatus({ success: false });
-                        setErrors({ submit: err.message });
-                        setSubmitting(false);
-                    }
+
+                    setStatus({ success: false });
+                    setErrors({ submit: err.message });
+                    setSubmitting(false);
                 }
             }}
         >

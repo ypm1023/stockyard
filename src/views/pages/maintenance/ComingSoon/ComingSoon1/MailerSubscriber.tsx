@@ -9,14 +9,12 @@ import axios from 'axios';
 
 // project imports
 import AnimateButton from 'ui-component/extended/AnimateButton';
-import useScriptRef from 'hooks/useScriptRef';
 import { openSnackbar } from 'store/slices/snackbar';
 import { gridSpacing } from 'store/constant';
 
 // ===========================|| MAILER SUBSCRIBER ||=========================== //
 
 const MailerSubscriber = ({ className, ...others }: { className?: string }) => {
-    const scriptedRef = useScriptRef();
     const dispatch = useDispatch();
 
     return (
@@ -48,16 +46,12 @@ const MailerSubscriber = ({ className, ...others }: { className?: string }) => {
                         })
                     );
 
-                    if (scriptedRef.current) {
-                        setStatus({ success: true });
-                        setSubmitting(false);
-                    }
+                    setStatus({ success: true });
+                    setSubmitting(false);
                 } catch (err: any) {
-                    if (scriptedRef.current) {
-                        setStatus({ success: false });
-                        setErrors({ submit: err?.message });
-                        setSubmitting(false);
-                    }
+                    setStatus({ success: false });
+                    setErrors({ submit: err?.message });
+                    setSubmitting(false);
                 }
             }}
         >

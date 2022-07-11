@@ -9,7 +9,6 @@ import { Formik } from 'formik';
 
 // project imports
 import useAuth from 'hooks/useAuth';
-import useScriptRef from 'hooks/useScriptRef';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 
 // assets
@@ -20,7 +19,6 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const FirebaseLogin = ({ loginProp, ...others }: { loginProp?: number }) => {
     const theme = useTheme();
-    const scriptedRef = useScriptRef();
 
     const { login } = useAuth();
 
@@ -37,74 +35,77 @@ const FirebaseLogin = ({ loginProp, ...others }: { loginProp?: number }) => {
         <>
             <Formik
                 initialValues={{
-                    email: 'info@codedthemes.com',
-                    password: '123456',
+                    loginName: '',
+                    encodePwd: '',
                     submit: null
                 }}
                 validationSchema={Yup.object().shape({
-                    email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
-                    password: Yup.string().max(255).required('Password is required')
+                    loginName: Yup.string().max(255).required('请输入用户名'),
+                    encodePwd: Yup.string().max(255).required('请输入密码')
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
-                        await login(values.email, values.password).then(
+                        await login(values.loginName, values.encodePwd).then(
                             () => {
-                                console.log('~~~~~~~~~~~~~~~~~~~~firebaseEmailPasswordSignIn');
+                                console.log('-0-----------------------');
                                 // WARNING: do not set any formik state here as formik might be already destroyed here. You may get following error by doing so.
                                 // Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application.
                                 // To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
                                 // github issue: https://github.com/formium/formik/issues/2430
                             },
                             (err: any) => {
-                                if (scriptedRef.current) {
-                                    setStatus({ success: false });
-                                    setErrors({ submit: err.message });
-                                    setSubmitting(false);
-                                }
+                                console.log('err------------------------>', err);
+
+                                setStatus({ success: false });
+                                setErrors({ submit: err.message });
+                                setSubmitting(false);
                             }
                         );
                     } catch (err: any) {
                         console.error(err);
-                        if (scriptedRef.current) {
-                            setStatus({ success: false });
-                            setErrors({ submit: err.message });
-                            setSubmitting(false);
-                        }
+
+                        setStatus({ success: false });
+                        setErrors({ submit: err.message });
+                        setSubmitting(false);
                     }
                 }}
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
-                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <InputLabel htmlFor="outlined-adornment-email-login">手机号</InputLabel>
+                        <FormControl
+                            fullWidth
+                            error={Boolean(touched.loginName && errors.loginName)}
+                            sx={{ ...theme.typography.customInput }}
+                        >
+                            <InputLabel htmlFor="outlined-adornment-email-login">用户名</InputLabel>
                             <OutlinedInput
                                 id="outlined-adornment-email-login"
-                                type="email"
-                                value={values.email}
-                                name="email"
+                                type="loginName"
+                                value={values.loginName}
+                                name="loginName"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 label="Email Address / Username"
                                 inputProps={{}}
                             />
-                            {touched.email && errors.email && (
+                            {touched.loginName && errors.loginName && (
                                 <FormHelperText error id="standard-weight-helper-text-email-login">
-                                    {errors.email}
+                                    {errors.loginName}
                                 </FormHelperText>
                             )}
                         </FormControl>
 
                         <FormControl
                             fullWidth
-                            error={Boolean(touched.password && errors.password)}
+                            error={Boolean(touched.encodePwd && errors.encodePwd)}
                             sx={{ ...theme.typography.customInput }}
                         >
                             <InputLabel htmlFor="outlined-adornment-password-login">密码</InputLabel>
                             <OutlinedInput
                                 id="outlined-adornment-password-login"
                                 type={showPassword ? 'text' : 'password'}
-                                value={values.password}
-                                name="password"
+                                value={values.encodePwd}
+                                name="encodePwd"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 endAdornment={
@@ -123,9 +124,9 @@ const FirebaseLogin = ({ loginProp, ...others }: { loginProp?: number }) => {
                                 label="Password"
                                 inputProps={{}}
                             />
-                            {touched.password && errors.password && (
+                            {touched.encodePwd && errors.encodePwd && (
                                 <FormHelperText error id="standard-weight-helper-text-password-login">
-                                    {errors.password}
+                                    {errors.encodePwd}
                                 </FormHelperText>
                             )}
                         </FormControl>

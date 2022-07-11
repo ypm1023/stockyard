@@ -28,7 +28,6 @@ import { Formik } from 'formik';
 // project imports
 import useAuth from 'hooks/useAuth';
 import useConfig from 'hooks/useConfig';
-import useScriptRef from 'hooks/useScriptRef';
 import Google from 'assets/images/icons/social-google.svg';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import { strengthColor, strengthIndicator } from 'utils/password-strength';
@@ -42,7 +41,6 @@ import { StringColorProps } from 'types';
 
 const FirebaseRegister = ({ ...others }) => {
     const theme = useTheme();
-    const scriptedRef = useScriptRef();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
     const { borderRadius } = useConfig();
     const [showPassword, setShowPassword] = React.useState(false);
@@ -154,20 +152,17 @@ const FirebaseRegister = ({ ...others }) => {
                                 // github issue: https://github.com/formium/formik/issues/2430
                             },
                             (err: any) => {
-                                if (scriptedRef.current) {
-                                    setStatus({ success: false });
-                                    setErrors({ submit: err.message });
-                                    setSubmitting(false);
-                                }
+                                setStatus({ success: false });
+                                setErrors({ submit: err.message });
+                                setSubmitting(false);
                             }
                         );
                     } catch (err: any) {
                         console.error(err);
-                        if (scriptedRef.current) {
-                            setStatus({ success: false });
-                            setErrors({ submit: err.message });
-                            setSubmitting(false);
-                        }
+
+                        setStatus({ success: false });
+                        setErrors({ submit: err.message });
+                        setSubmitting(false);
                     }
                 }}
             >

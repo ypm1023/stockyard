@@ -21,7 +21,7 @@ import {
 import Avatar from 'ui-component/extended/Avatar';
 import { UserProfile } from 'types/user-profile';
 import { useDispatch, useSelector } from 'store';
-import { getUsersListStyle1 } from 'store/slices/user';
+import { getUsersList } from 'store/slices/user';
 
 // assets
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -44,7 +44,7 @@ const UserList = () => {
     }, [usersS1]);
 
     React.useEffect(() => {
-        dispatch(getUsersListStyle1());
+        dispatch(getUsersList());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
